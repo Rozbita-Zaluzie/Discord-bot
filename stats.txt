@@ -1,0 +1,18 @@
+=== INFO ===
+ping - 5
+credits - 0
+trello - 0
+members - 1
+
+=== COMMANDS ===
+join - 0
+leave - 0
+
+=== GAMES ===
+pilot - 0
+pele - 7
+anone - 2
+jakoty - 0
+kralik - 0
+didorici - 1
+facka - 1
