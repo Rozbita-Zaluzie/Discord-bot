@@ -43,6 +43,13 @@ async def credits(ctx):
     await ctx.send("```IG - https://www.instagram.com/rozbita_zaluzie/```")
     write("credits")
 
+#! on error
+@client.event
+async def on_command_error(ctx, error):
+    print("=== ERROR ===")
+    print(f"= {error}")
+    await ctx.send("=== ERROR ===")
+
 #* .pilot
 @client.command()
 async def pilot(ctx):
