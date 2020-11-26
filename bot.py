@@ -3,11 +3,13 @@ from discord.ext import commands, tasks
 from discord import message
 import random
 import os
+from os import system
 from discord.utils import get
 from itertools import cycle
 import asyncio
 from  discord import guild
 import time
+
 
 intents = discord.Intents(messages = True, guilds = True, members = True)
 client = commands.Bot(command_prefix = '.', intents=intents)
@@ -17,8 +19,9 @@ client = commands.Bot(command_prefix = '.', intents=intents)
 async def on_ready():
     activity = discord.Activity(name='SERVER', type=discord.ActivityType.watching)
     await client.change_presence(activity=activity)
+    os.system("cls")
     for x in client.guilds:
-        print(f"=== BOT IS READY ON : {x.name}")
+        print(f"\033[1;32;40m[loged] \033[1;37;40m- {x.name}")
 
 #! on member join
 @client.event
@@ -30,25 +33,12 @@ async def on_member_join(member):
 async def on_member_remove(member):
     print(f'{member} has left a server')
 
-#! .ping
-@client.command()
-async def ping(ctx):
-    await ctx.send(f"Pong! {round(client.latency * 1000)}ms")
-    write("ping")
-
 #! .credits
 @client.command()
 async def credits(ctx):
     await ctx.send("```Made by - Rozbita_Zaluzie```")
     await ctx.send("```IG - https://www.instagram.com/rozbita_zaluzie/```")
     write("credits")
-
-#! on error
-@client.event
-async def on_command_error(ctx, error):
-    print("=== ERROR ===")
-    print(f"= {error}")
-    await ctx.send("=== ERROR ===")
 
 #* .pilot
 @client.command()
@@ -122,7 +112,7 @@ async def leave(ctx):
 @client.command()
 async def members(ctx):
     await ctx.send(f"This server has {ctx.guild.member_count} members.")
-    i = 0
+    i = 1
     for x in ctx.guild.members:
         await ctx.send(f"`{i}. - {x.name}`")
         i+=1
@@ -146,20 +136,29 @@ async def facka(ctx):
         await ctx.send(f"{r.mention}{slovo}{ctx.author.mention}")
     write("facka")
 
-#? .lock
+#* .lock
 @client.command()
-async def lock(ctx, member: discord.Member, channel : discord.VoiceChannel):
-    start_time = time.time()
-    t_end = start_time + 30
-    i = 0
-    while time.time() < t_end:
+async def lock(ctx, member: discord.Member, channel : discord.VoiceChannel, channel2 : discord.VoiceChannel, x=14):
+    print(f"\033[1;31;40m[locker] \033[1;34;40m- name \033[1;37;40m- {member.name}")
+    print(f"\033[1;31;40m[locker] \033[1;34;40m- channel 1 \033[1;37;40m- {channel.name}")
+    print(f"\033[1;31;40m[locker] \033[1;34;40m- channel 2 \033[1;37;40m- {channel2.name}")
+    print(f"\033[1;31;40m[locker] \033[1;34;40m- time \033[1;37;40m- {x}")
+    if x < 14:
+        x = 14
+    x = (x / float(14)) * 10
+    i = 1
+    while i <= x:
         try:
             await member.move_to(channel)
+        except: 
+            print("")
+        try:
+            await member.move_to(channel2)
         except:
-            print("idiote")
-        print(i)
+            print("")
         i+=1
         time.sleep(0.1)
+    print(f"\033[1;32;40m[locker] \033[1;34;40m- unlocked \033[1;37;40m- {member.name}")
 
 #* .meme
 @client.command()
@@ -171,10 +170,11 @@ async def meme(channel):
     meme = random.choice(imgs)
     memeC = "memes\\" + str(meme.name) 
     await channel.send(file=discord.File(memeC))
+    write("meme")
 
 #// write stats
 def write(commandN):
-    print("added --> " + commandN)
+    print(f"\033[1;34;40m[added] \033[1;37;40m- {commandN}")
     fileR = open("stats.txt", "r")
     stats = []
     for x in fileR:
