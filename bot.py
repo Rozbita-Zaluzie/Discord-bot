@@ -33,12 +33,49 @@ async def on_member_join(member):
 async def on_member_remove(member):
     print(f'{member} has left a server')
 
+#! .delete
+@client.command()
+async def delete(message, x=1):
+    channel = message.channel
+    if x == 0:
+        messages = await channel.history().flatten()
+    else:
+        messages = await channel.history(limit=x).flatten()
+
+    for message in messages:
+        await message.delete()
+
+    if x == 0:
+        print(f"\033[1;31;40m[delete] \033[1;34;40m- channel \033[1;37;40m- {channel.name}")
+        print(f"\033[1;31;40m[delete] \033[1;34;40m- messages \033[1;37;40m- all")
+    else:
+        print(f"\033[1;31;40m[delete] \033[1;34;40m- channel \033[1;37;40m- {channel.name}")
+        print(f"\033[1;31;40m[delete] \033[1;34;40m- messages \033[1;37;40m- {x}")
+
+#! .delete_member
+@client.command()
+async def delete_member(message, member : discord.Member):
+    channel = message.channel
+    messages = await channel.history().flatten()
+    number = 0
+
+    for message in messages:
+        if message.author == member:
+            await message.delete()
+            number += 1
+
+    print(f"\033[1;31;40m[delete] \033[1;34;40m- channel \033[1;37;40m- {channel.name}")
+    print(f"\033[1;31;40m[delete] \033[1;34;40m- member \033[1;37;40m- {member.name}")
+    print(f"\033[1;31;40m[delete] \033[1;34;40m- messages \033[1;37;40m- {x}")
+
+
 #! .credits
 @client.command()
 async def credits(ctx):
     await ctx.send("```Made by - Rozbita_Zaluzie```")
     await ctx.send("```IG - https://www.instagram.com/rozbita_zaluzie/```")
     write("credits")
+
 
 #* .pilot
 @client.command()
@@ -138,7 +175,8 @@ async def facka(ctx):
 
 #* .lock
 @client.command()
-async def lock(ctx, member: discord.Member, channel : discord.VoiceChannel, channel2 : discord.VoiceChannel, x=14):
+@commands.has_any_role("Majitel", "Admin")
+async def lock(ctx, member : discord.Member, channel : discord.VoiceChannel, channel2 : discord.VoiceChannel, x=14):
     print(f"\033[1;31;40m[locker] \033[1;34;40m- name \033[1;37;40m- {member.name}")
     print(f"\033[1;31;40m[locker] \033[1;34;40m- channel 1 \033[1;37;40m- {channel.name}")
     print(f"\033[1;31;40m[locker] \033[1;34;40m- channel 2 \033[1;37;40m- {channel2.name}")
@@ -150,12 +188,12 @@ async def lock(ctx, member: discord.Member, channel : discord.VoiceChannel, chan
     while i <= x:
         try:
             await member.move_to(channel)
-        except: 
-            print("")
+        except:
+            pass
         try:
             await member.move_to(channel2)
         except:
-            print("")
+            pass
         i+=1
         time.sleep(0.1)
     print(f"\033[1;32;40m[locker] \033[1;34;40m- unlocked \033[1;37;40m- {member.name}")
