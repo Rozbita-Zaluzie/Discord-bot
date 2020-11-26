@@ -15,5 +15,7 @@
     - .members
     - .facka
     - .meme
-    - ~~.lock~~
+    - .lock
+    - .delete
+    - .delete_member
     - couting command uses
