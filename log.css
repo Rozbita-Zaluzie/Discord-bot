@@ -1,0 +1,64 @@
+body {
+    background: #0c0c0c
+}
+mess {
+    padding-left: 20px;
+    padding-top: 3px;
+    display: block;
+    vertical-align: middle;
+}
+txt {
+    font-family: Consolas; 
+    font-size: 14px;
+}
+.red {
+    color: #e73628
+}
+.blue {
+    color : #3b78ff
+}
+.white {
+    color : #ffffff
+}
+.yellow {
+    color : #f9f1a5
+}
+.orange {
+    color : #ff6f00
+}
+.green {
+    color : #16c60c
+}
+time {
+    color: white;
+    font-family: Consolas; 
+    font-size: 18px;
+}
+block {
+    display: block;
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    border-bottom-style: solid;
+    border-bottom-color: white;
+    border-bottom-width: 1px
+}
+member {
+    color: white;
+    border: solid white 1px;
+    border-radius: 4px;
+    padding: 2px;
+    font-family: Lucida Console;
+    font-size: 12px;
+    margin: 10px
+}
+
+.members {
+    margin-top: 10
+}
+
+img {
+    height: 24px;
+    margin-left: 10px;
+    border-radius: 4px;
+    border:  solid gray 0.1px
+}
